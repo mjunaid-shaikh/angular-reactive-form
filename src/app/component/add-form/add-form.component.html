@@ -1,0 +1,125 @@
+<div class="container">
+      <div class="row m-3 justify-content-center">
+            <div class="col-md-7 shadow-lg " style="background-color: antiquewhite;">
+                  <form [formGroup]="addForm">
+
+                        <div class="m-3">
+                              <label class="form-label">Title</label>
+                              <input type="text" formControlName="title" class="form-control"
+                                    [ngClass]="title?.invalid && (title?.dirty || title?.touched)?'form-control is-invalid':'form-control'">
+                              <div *ngIf="title?.invalid && (title?.dirty || title?.touched)">
+                                    <span *ngIf="title?.errors?.['required']" class="text-danger">Title is
+                                          required.</span>
+                              </div>
+                        </div>
+
+                        <div class="m-3">
+                              <label class="form-label">Upload Image</label>
+                              <input type="file" formControlName="image" class="form-control" (change)="handleUpload($event)"
+                                    [ngClass]="image?.invalid && (image?.dirty || image?.touched)?'form-control is-invalid':'form-control'">
+                              <div *ngIf="image?.invalid && (image?.dirty || image?.touched)">
+                                    <span *ngIf="image?.errors?.['required']" class="text-danger">image is
+                                          required.</span>
+                              </div>
+                        </div>
+
+                        <div class="m-3">
+                              <label class="form-label">Short Summary</label>
+                              <textarea name="summary" class="form-control" formControlName="summary"
+                                    [ngClass]="summary?.invalid && (summary?.dirty || summary?.touched)?'form-control is-invalid':'form-control'"></textarea>
+                              <div *ngIf="summary?.invalid && (summary?.dirty || summary?.touched)">
+                                    <span *ngIf="summary?.errors?.['required']" class="text-danger">summary is
+                                          required.</span>
+                              </div>
+                        </div>
+
+                        <div class="m-3">
+                              <label class="form-label">Rating</label>
+                              <input type="text" formControlName="rating" class="form-control"
+                                    [ngClass]="rating?.invalid && (rating?.dirty || rating?.touched)?'form-control is-invalid':'form-control'">
+                              <div *ngIf="rating?.invalid && (rating?.dirty || rating?.touched)">
+                                    <span *ngIf="rating?.errors?.['required']" class="text-danger">rating is
+                                          required.</span>
+                              </div>
+                        </div>
+
+                        <div class="m-3">
+                              <label class="form-label">Veg / Non-Veg</label>
+                              <input type="text" formControlName="isVegNonveg" class="form-control"
+                                    [ngClass]="isVegNonveg?.invalid && (isVegNonveg?.dirty || isVegNonveg?.touched)?'form-control is-invalid':'form-control'">
+                              <div *ngIf="isVegNonveg?.invalid && (isVegNonveg?.dirty || isVegNonveg?.touched)">
+                                    <span *ngIf="isVegNonveg?.errors?.['required']" class="text-danger">isVegNonveg is
+                                          required.</span>
+                              </div>
+                        </div>
+
+                        <div class="m-3 ">
+                              <div><label class="form-label">Ingredents</label></div>
+                              <ng-container *ngFor="let itemNumber of itemCount;let itemIndex=index">
+                                    <div class="d-flex col-md-12">
+
+                                          <div class="m-1 col-md-4">
+                                                <input type="text" [formControlName]="'ingredentsQty'+itemNumber"
+                                                      class="form-control" placeholder="steps">
+                                          </div>
+
+                                          <div class="m-1 col-md-7">
+                                                <input type="text" [formControlName]="'ingredentsDtls'+itemNumber"
+                                                      class="form-control" placeholder="description">
+                                          </div>
+
+                                          <div style="align-self: end; margin-left: 1rem;">
+                                                <h4 (click)="addIngredentsItem()" *ngIf="itemIndex === 0"><i
+                                                            class="bi bi-plus-circle"></i></h4>
+                                                <!-- <button class="btn border btn-success" type="button"
+                                                      (click)="addIngredentsItem()" *ngIf="itemIndex === 0">Add</button> -->
+                                          </div>
+
+                                          <div style="align-self: end;">
+                                                <h4 (click)="removeIngredentsItem(itemNumber,itemIndex)"
+                                                      *ngIf="itemIndex !== 0"><i class="bi bi-dash-circle"></i></h4>
+                                                <!-- <button class="btn border btn-danger" type="button"
+                                                      (click)="removeIngredentsItem(itemNumber,itemIndex)"
+                                                      *ngIf="itemIndex !== 0">Del</button> -->
+                                          </div>
+                                    </div>
+                              </ng-container>
+                        </div>
+                        <div class="m-3 ">
+                              <div><label class="form-label">Direction</label></div>
+                              <ng-container *ngFor="let directionNumber of directionCount;let directionIndex=index">
+                                    <div class="d-flex col-md-12">
+
+                                          <div class="m-1 col-md-4">
+                                                <input type="text" [formControlName]="'directionSteps'+directionNumber"
+                                                      class="form-control" placeholder="steps">
+                                          </div>
+
+                                          <div class="m-1 col-md-7">
+                                                <input type="text" [formControlName]="'directionDtls'+directionNumber"
+                                                      class="form-control" placeholder="description">
+                                          </div>
+
+                                          <div style="align-self: end; margin-left: 1rem;" class="">
+                                                <h4 (click)="adddirection()" *ngIf="directionIndex === 0"><i
+                                                            class="bi bi-plus-circle"></i></h4>
+                                                <!-- <button class="btn btn-success border" type="button"
+                                                      (click)="adddirection()" *ngIf="directionIndex === 0">Add</button> -->
+                                          </div>
+
+                                          <div style="align-self: end; " class="">
+                                                <h4 (click)="removeDirection(directionNumber,directionIndex)"
+                                                      *ngIf="directionIndex !== 0"><i class="bi bi-dash-circle"></i>
+                                                </h4>
+                                                <!-- <button class="btn border btn-danger" type="button"
+                                                      (click)="removeDirection(directionNumber,directionIndex)"
+                                                      *ngIf="directionIndex !== 0">Del</button> -->
+                                          </div>
+                                    </div>
+                              </ng-container>
+                        </div>
+                        <button type="submit" (click)="formSubmit()" class="btn btn-primary m-3">Submit</button>
+                  </form>
+            </div>
+      </div>
+</div>
